@@ -62,7 +62,7 @@ export async function upsertSite({
     },
   });
 
-  revalidateTag(site.subdomain);
+  revalidateTag(site.subdomain, "max");
 
   return { success: true, site: site };
 }
@@ -80,7 +80,7 @@ export async function deleteSite(siteId: string) {
       },
     });
 
-    revalidateTag(response.subdomain);
+    revalidateTag(response.subdomain, "max");
 
     return { success: true };
   } catch (error) {
