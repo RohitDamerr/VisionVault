@@ -1,6 +1,5 @@
-<img alt="Vision Vault Website Builder" src="/public/thumbnail.png">
 <h1 align="center">Vision Vault</h1>  
-<p align="center">The open-source drag-and-drop website builder boilerplate.</p>
+<p align="center">The drag-and-drop website builder boilerplate.</p>
 
 <p align="center">
   <a href="#introduction"><strong>Introduction</strong></a> ·
