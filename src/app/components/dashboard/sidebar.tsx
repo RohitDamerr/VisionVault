@@ -47,7 +47,7 @@ const items = [
 const externalLinks = [
   {
     title: "Star on Github",
-    href: "https://github.com/belastrittmatter/vision-vault",
+    href: "https://github.com/Rohitdamerr/VisionVault",
     icon: Github,
   },
 ];
