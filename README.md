@@ -4,7 +4,6 @@
 <p align="center">
   <a href="#introduction"><strong>Introduction</strong></a> ·
   <a href="#features-current--planned"><strong>Features</strong></a> ·
-  <a href="#demo"><strong>Demo</strong></a> ·
   <a href="#contributing"><strong>Contributing</strong></a>
 </p>
 
@@ -43,9 +42,6 @@ Vision Vault is a full-stack Next.js application offering multi-tenancy, custom 
 
 ---
 
-## Demo
-
-[**View the live Demo**](https://visionvault.site)
 
 ---
 
@@ -63,8 +59,6 @@ This project is built with the following tools and services:
 ---
 
 ## Resources
-
-- [**Article explaining the core technology**](https://dev.to/belastrittmatter/building-a-nextjs-website-editor-bj3)
 
 Creating Vision Vault would not have been possible without the following resources:
 
