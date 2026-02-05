@@ -1,11 +1,9 @@
-<img alt="Vision Vault Website Builder" src="/public/thumbnail.png">
 <h1 align="center">Vision Vault</h1>  
-<p align="center">The open-source drag-and-drop website builder boilerplate.</p>
+<p align="center">The drag-and-drop website builder boilerplate.</p>
 
 <p align="center">
   <a href="#introduction"><strong>Introduction</strong></a> ·
   <a href="#features-current--planned"><strong>Features</strong></a> ·
-  <a href="#demo"><strong>Demo</strong></a> ·
   <a href="#contributing"><strong>Contributing</strong></a>
 </p>
 
@@ -14,8 +12,6 @@
 ## Introduction
 
 Vision Vault is a full-stack Next.js application offering multi-tenancy, custom domain support, and a flexible drag-and-drop web editor.
-
-<img alt="Vision Vault Website Builder Demo Gif" src="/public/demo.gif">
 
 🚧 **This project is currently under active development.** Some features are already functional, while most are still being actively built. Contributions and feedback are highly appreciated to shape its final form!
 
@@ -44,9 +40,6 @@ Vision Vault is a full-stack Next.js application offering multi-tenancy, custom 
 
 ---
 
-## Demo
-
-[**View the live Demo**](https://visionvault.site)
 
 ---
 
@@ -64,8 +57,6 @@ This project is built with the following tools and services:
 ---
 
 ## Resources
-
-- [**Article explaining the core technology**](https://dev.to/belastrittmatter/building-a-nextjs-website-editor-bj3)
 
 Creating Vision Vault would not have been possible without the following resources:
 
