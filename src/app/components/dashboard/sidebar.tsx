@@ -24,24 +24,18 @@ import {
 } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
 import {
-  ChartLine,
   Github,
   Globe,
-  LayoutDashboard,
   Lightbulb,
   LogOut,
   Moon,
   MoveUpRight,
-  Settings,
   SquareDashedMousePointer,
 } from "lucide-react";
 import { useTheme } from "next-themes";
 
 const items = [
-  { title: "Overview", url: "#", icon: LayoutDashboard },
   { title: "Sites", url: "#", icon: Globe },
-  { title: "Analytics", url: "#", icon: ChartLine },
-  { title: "Settings", url: "#", icon: Settings },
 ];
 
 const externalLinks = [

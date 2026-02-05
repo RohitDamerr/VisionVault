@@ -1,6 +1,5 @@
 import { clerkMiddleware } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
-import { getLink } from "./lib/getLink";
 
 export const config = {
   matcher: ["/((?!api/|_next/|_static/|_vercel|[\\w-]+\\.\\w+).*)"],
@@ -8,43 +7,55 @@ export const config = {
 
 export default clerkMiddleware(async (auth, req) => {
   const url = req.nextUrl;
-
-  // Get hostname of request (e.g. demo.framely.site, demo.localhost:3000)
   const hostname = req.headers.get("host")!;
-
-  // Get the pathname of the request (e.g. /, /about, /blog/first-post)
   const path = url.pathname;
 
-  // Handle editor subdomain
-  if (
-    hostname === getLink({ subdomain: "editor", method: false }).slice(0, -1)
-  ) {
+  // Determine the base domain we should treat as the "root" app host.
+  // Prefer NEXT_PUBLIC_ROOT_DOMAIN when set, otherwise fall back to
+  // the Vercel-provided URL so previews and production both work.
+  const envRootDomain =
+    process.env.NEXT_PUBLIC_ROOT_DOMAIN || process.env.NEXT_PUBLIC_VERCEL_URL;
+
+  const rootDomain = envRootDomain
+    ? envRootDomain.replace(/^https?:\/\//, "").replace(/\/$/, "")
+    : null;
+
+  // If we cannot determine a root domain, just let Next handle routing
+  // without any multi-tenant rewrites.
+  if (!rootDomain) {
+    return NextResponse.next();
+  }
+
+  // Editor subdomain: editor.<rootDomain>
+  if (hostname === `editor.${rootDomain}`) {
     await auth.protect();
     return NextResponse.rewrite(
       new URL(`/editor${path === "/" ? "" : path}`, req.url),
     );
   }
 
-  // Only allow app.framely.site for dashboard page, sounds better, more concise
-  if (hostname === getLink({ subdomain: "app", method: false }).slice(0, -1)) {
+  // Application dashboard subdomain: app.<rootDomain>
+  if (hostname === `app.${rootDomain}`) {
     await auth.protect();
     return NextResponse.rewrite(
       new URL(`/dashboard${path === "/" ? "" : path}`, req.url),
     );
   }
 
-  if (
-    hostname === getLink({ subdomain: "dashboard", method: false }).slice(0, -1)
-  ) {
-    return NextResponse.redirect(getLink({ subdomain: "app" }));
+  // Legacy/extra dashboard.<rootDomain> -> redirect to app.<rootDomain>
+  if (hostname === `dashboard.${rootDomain}`) {
+    return NextResponse.redirect(`https://app.${rootDomain}`);
   }
 
-  if (hostname === getLink({ method: false }).slice(0, -1)) {
+  // Root domain (no subdomain) should serve the dashboard (for now).
+  if (hostname === rootDomain) {
     // TODO: Redirect to /landing once the page is built
-    return NextResponse.rewrite(new URL(`/dashboard${path}`, req.url));
+    return NextResponse.rewrite(
+      new URL(`/dashboard${path === "/" ? "" : path}`, req.url),
+    );
   }
 
-  // Handle custom subdomains
+  // Handle custom subdomains: <siteSubdomain>.<rootDomain>
   const subdomain = hostname.split(".")[0];
   return NextResponse.rewrite(new URL(`/${subdomain}${path}`, req.url));
 });

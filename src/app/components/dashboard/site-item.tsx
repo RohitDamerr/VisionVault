@@ -59,7 +59,6 @@ function PageItem({ site }: { site: Page }) {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuItem>Settings</DropdownMenuItem>
             <DropdownMenuItem
               className="flex items-center gap-2 text-destructive"
               onClick={() => handleDelete(site.id)}
